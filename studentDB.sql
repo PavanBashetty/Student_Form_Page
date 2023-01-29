@@ -46,7 +46,17 @@ CONSTRAINT `fk_student_id_address` FOREIGN KEY(student_id) REFERENCES students(s
 SELECT * FROM student_address;
 
 -- edit table data
-INSERT INTO student_address VALUES(10001, 02356, 'BS23', 69123, 'Heidelberg', 'DE'); 
+INSERT INTO student_address VALUES(10002, 034562, 'MPS3', 69123, 'Heidelberg', 'DE'),
+									(10003, 098124, 'Bismark', 69115, 'Heidelberg', 'DE'),
+                                    (10004, 012873, 'MPS3', 69123, 'Heidelberg', 'DE'),
+                                    (10005, 012312, 'Atlas1', 68534, 'Heidelberg', 'DE'),
+                                    (10006, 038722, 'MPS3', 69123, 'Heidelberg', 'DE'),
+                                    (10007, 045612, 'BS9', 69123, 'Heidelberg', 'DE'),
+                                    (10008, 021981, 'BS13', 69123, 'Heidelberg', 'DE'),
+                                    (10015, 098765, 'BS9', 69123, 'Heidelberg', 'DE'),
+                                    (10017, 091234, 'BS11', 69123, 'Heidelberg', 'DE'),
+                                    (10018, 090324, 'Abendacadmie', 79123, 'Mannheim', 'DE'),
+                                    (10019, 087654, 'Neue1', 66234, 'Heidelberg', 'DE');
 -- -------------------------------------------------------------
 
 
@@ -62,13 +72,23 @@ INDEX `idx_student_id_scorecard` (student_id),
 CONSTRAINT `fk_student_id_scorecard` FOREIGN KEY(student_id) REFERENCES students(student_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+SELECT * from students;
+SELECT * FROM student_address;
 SELECT * FROM student_scorecard;
-INSERT INTO student_scorecard VALUES(10001, 'one', 'CTCS', 1.2, 8);
-
+INSERT INTO student_scorecard VALUES(10019, 'one', 'IPM', 2, 8),
+									(10019, 'one', 'SDP', 2, 8),
+                                    (10019, 'one', 'AAI', 2, 8),
+                                    (10019, 'one', 'CTCS', 1.3, 8),
+                                    (10019, 'two', 'ITS', 3.5, 8),
+                                    (10019, 'two', 'UI_UX', 1.7, 8);
 -- -------------------------------------------------------------
 
 
-
+SELECT s.last_name, s.first_name, sa.phone, sa.street, sa.pincode, sa.city, sa.country, ss.semester, ss.subject_name, ss.score,
+ss.credits_earned FROM students s 
+join student_address sa ON s.student_id = sa.student_id 
+join student_scorecard ss on sa.student_id = ss.student_id
+WHERE s.student_id = 10001;
 
 
 
