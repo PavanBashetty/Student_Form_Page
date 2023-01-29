@@ -11,6 +11,7 @@
             <th>Course</th>
             <th>Batch</th>
             <th>Action</th>
+            <th>More Info</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
             <td>{{ student.course }}</td>
             <td>{{ student.batch }}</td>
             <td><button type="button" class="deleteButton" v-on:click="removeStudentInfo(student.student_id, student.last_name, student.first_name)"> Delete </button></td>
+            <td><button type="button" class="moreInfoButton" v-on:click="moreInfoButton(student.student_id)">Click Here</button></td>
         </tr>
     </tbody>
 </table>
@@ -47,6 +49,7 @@ export default {
        async loadStudentsTable(){
            await axios.get("/api/students")
             .then((res)=>{
+                //console.log(res);
                 this.students = res.data.data;
             })
             .catch(()=>{
@@ -71,6 +74,11 @@ export default {
                 }
             })
             .catch(()=>{console.log("went wrong");})
+        },
+        moreInfoButton(sid){
+            return this.$router.push({
+                path:'/moreinfo/'+sid
+            })
         }
     }
 }
@@ -85,7 +93,10 @@ table, th, td{
 }
 .deleteButton{
     background-color: #f44336;
+    cursor: pointer;   
+}
+.moreInfoButton{
+    background-color: green;
     cursor: pointer;
-    
 }
 </style>
