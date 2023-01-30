@@ -15,10 +15,11 @@ app.get("/", (req,res)=>{
 })
 
 
+//mysql connection
 const connection = mysql.createConnection({
     host:"localhost",
     user:"root",
-    password:"",
+    password:"---",
     database: "srh_02"
 });
 
